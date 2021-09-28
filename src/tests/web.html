@@ -27,7 +27,7 @@
             const transactWithConfig = async (config, memo, from = 'bob', to = 'alice') => {
               return api.transact({
                 actions: [{
-                  account: 'eosio.token',
+                  account: 'vex.token',
                   name: 'transfer',
                   authorization: [{
                     actor: from,
@@ -36,7 +36,7 @@
                   data: {
                     from,
                     to,
-                    quantity: '0.0001 SYS',
+                    quantity: '0.0001 VEX',
                     memo,
                   },
                 }]
@@ -102,7 +102,7 @@
                     ref_block_num: blockInfo.block_num & 0xffff,
                     ref_block_prefix: blockInfo.ref_block_prefix,
                     actions: [{
-                        account: 'eosio.token',
+                        account: 'vex.token',
                         name: 'transfer',
                         authorization: [{
                             actor: 'bob',
@@ -111,7 +111,7 @@
                         data: {
                             from: 'bob',
                             to: 'alice',
-                            quantity: '0.0001 SYS',
+                            quantity: '0.0001 VEX',
                             memo: 'transactWithoutConfig2',
                         },
                     }]
@@ -291,10 +291,10 @@
             }
 
             const shorthandWithApiJson = async () => {
-              await api.getAbi('eosio.token');
+              await api.getAbi('vex.token');
               return api.transact({
                 actions: [
-                  api.with('eosio.token').as('bob').transfer('bob', 'alice', '0.0001 SYS', 'transactWithShorthandApiJson')
+                  api.with('vex.token').as('bob').transfer('bob', 'alice', '0.0001 VEX', 'transactWithShorthandApiJson')
                 ]
               }, {
                 blocksBehind: 3,
@@ -326,9 +326,9 @@
             };
 
             const shorthandWithTxJson = async () => {
-              await api.getAbi('eosio.token');
+              await api.getAbi('vex.token');
               const tx = api.buildTransaction();
-              tx.with('eosio.token').as('bob').transfer('bob', 'alice', '0.0001 SYS', 'transactWithShorthandTxJson');
+              tx.with('vex.token').as('bob').transfer('bob', 'alice', '0.0001 VEX', 'transactWithShorthandTxJson');
               return tx.send({
                 blocksBehind: 3,
                 expireSeconds: 30
@@ -484,7 +484,7 @@
                     max_memory_bytes: 0
                 },
                 actions: [{
-                    account: 'eosio.token',
+                    account: 'vex.token',
                     name: 'transfer',
                     authorization: [{
                         actor: 'bob',
@@ -496,7 +496,7 @@
                     data: {
                         from: 'bob',
                         to: 'alice',
-                        quantity: '0.0001 SYS',
+                        quantity: '0.0001 VEX',
                         memo: 'resource payer',
                     },
                 }]
@@ -585,7 +585,7 @@
             const readOnlyFailureTrace = async () => {
               return await api.transact({
                 actions: [{
-                    account: 'eosio',
+                    account: 'vexcore',
                     name: 'setpriv',
                     authorization: [{
                         actor: 'bob',
@@ -625,7 +625,7 @@
         
             const transactShouldFail = async () => await api.transact({
                 actions: [{
-                    account: 'eosio.token',
+                    account: 'vex.token',
                     name: 'transfer',
                     authorization: [{
                         actor: 'bob',
@@ -634,7 +634,7 @@
                     data: {
                         from: 'bob',
                         to: 'alice',
-                        quantity: '0.0001 SYS',
+                        quantity: '0.0001 VEX',
                         memo: '',
                     },
                 }]

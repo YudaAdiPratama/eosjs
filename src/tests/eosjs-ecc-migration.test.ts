@@ -10,9 +10,9 @@ describe('ecc Migration', () => {
         '5K4XZH5XR2By7Q5KTcZnPAmUMU5yjUNBdoKzzXyrLfmiEZJqoKE',
     ];
     const legacyPublicKeys = [
-        'EOS7tgwU6E7pAUQJgqEJt66Yi8cWvanTUW8ZfBjeXeJBQvhTU9ypi',
-        'EOS8VaY5CiTexYqgQZyPTJkc3qvWuZUi12QrZL9ssjqW2es6aQk2F',
-        'EOS7VGhqctkKprW1VUj19DZZiiZLX3YcJqUJCuEcahJmUCw3wJEMu',
+        'VEX7tgwU6E7pAUQJgqEJt66Yi8cWvanTUW8ZfBjeXeJBQvhTU9ypi',
+        'VEX8VaY5CiTexYqgQZyPTJkc3qvWuZUi12QrZL9ssjqW2es6aQk2F',
+        'VEX7VGhqctkKprW1VUj19DZZiiZLX3YcJqUJCuEcahJmUCw3wJEMu',
     ];
 
     it('verifies `initialize` returns console.error message', () => {
@@ -44,8 +44,8 @@ describe('ecc Migration', () => {
 
     it('verifies `privateToPublic` function is consistent between ecc objects', () => {
         console.warn = jest.fn();
-        const eccPublicKey = ecc.privateToPublic(privateKeys[0], 'EOS');
-        const eccMigrationPublicKey = eccMigration.privateToPublic(privateKeys[0], 'EOS');
+        const eccPublicKey = ecc.privateToPublic(privateKeys[0], 'VEX');
+        const eccMigrationPublicKey = eccMigration.privateToPublic(privateKeys[0], 'VEX');
         expect(console.warn).toHaveBeenCalledWith('Argument `pubkey_prefix` is deprecated, ' +
             'keys prefixed with PUB_K1_/PUB_R1_/PUB_WA_ going forward');
         expect(eccPublicKey).toEqual(eccMigrationPublicKey);
@@ -53,8 +53,8 @@ describe('ecc Migration', () => {
 
     it('verifies `isValidPublic` function is consistent between ecc objects', () => {
         console.warn = jest.fn();
-        const eccValid = ecc.isValidPublic(legacyPublicKeys[0], 'EOS');
-        const eccMigrationValid = eccMigration.isValidPublic(legacyPublicKeys[0], 'EOS');
+        const eccValid = ecc.isValidPublic(legacyPublicKeys[0], 'VEX');
+        const eccMigrationValid = eccMigration.isValidPublic(legacyPublicKeys[0], 'VEX');
         expect(console.warn).toHaveBeenCalledWith('Argument `pubkey_prefix` is deprecated, ' +
             'keys prefixed with PUB_K1_/PUB_R1_/PUB_WA_ going forward');
         expect(eccValid).toEqual(eccMigrationValid);
@@ -64,8 +64,8 @@ describe('ecc Migration', () => {
 
     it('verifies `isValidPublic` function is consistent during an error', () => {
         console.warn = jest.fn();
-        const eccValid = ecc.isValidPublic('publickey', 'EOS');
-        const eccMigrationValid = eccMigration.isValidPublic('publickey', 'EOS');
+        const eccValid = ecc.isValidPublic('publickey', 'VEX');
+        const eccMigrationValid = eccMigration.isValidPublic('publickey', 'VEX');
         expect(console.warn).toHaveBeenCalledWith('Argument `pubkey_prefix` is deprecated, ' +
             'keys prefixed with PUB_K1_/PUB_R1_/PUB_WA_ going forward');
         expect(eccValid).toEqual(eccMigrationValid);

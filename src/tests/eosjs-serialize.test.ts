@@ -54,8 +54,8 @@ describe('Serialize', () => {
             });
         }
 
-        it('should be able to push asset with valid EOS symbol "10.000 EOS"', () => {
-            const asset = '10.000 EOS';
+        it('should be able to push asset with valid VEX symbol "10.000 VEX"', () => {
+            const asset = '10.000 VEX';
 
             serialBuffer.pushAsset(asset);
 
@@ -74,14 +74,14 @@ describe('Serialize', () => {
             expectExceptionThrown(asset);
         });
 
-        it('should not be able to push invalid lowercase symbol "10.000 eos"', () => {
-            const asset = '10.000 eos';
+        it('should not be able to push invalid lowercase symbol "10.000 vex"', () => {
+            const asset = '10.000 vex';
 
             expectExceptionThrown(asset);
         });
 
-        it('should not be able to push two symbols "10.000 EOS blah"', () => {
-            const asset = '10.000 EOS blah';
+        it('should not be able to push two symbols "10.000 VEX blah"', () => {
+            const asset = '10.000 VEX blah';
 
             expectExceptionThrown(asset);
         });

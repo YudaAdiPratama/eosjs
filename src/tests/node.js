@@ -22,7 +22,7 @@ const api = new Api({ rpc, signatureProvider, textDecoder: new TextDecoder(), te
 const transactWithConfig = async (config, memo, from = 'bob', to = 'alice') => {
     return await api.transact({
         actions: [{
-            account: 'eosio.token',
+            account: 'vex.token',
             name: 'transfer',
             authorization: [{
                 actor: from,
@@ -51,7 +51,7 @@ const transactWithoutConfig = async () => {
         ref_block_num: blockInfo.block_num & 0xffff,
         ref_block_prefix: blockInfo.ref_block_prefix,
         actions: [{
-            account: 'eosio.token',
+            account: 'vex.token',
             name: 'transfer',
             authorization: [{
                 actor: 'bob',
@@ -119,10 +119,10 @@ const transactWithContextFreeData = async () => {
 };
 
 const transactWithShorthandApiJson = async () => {
-    await api.getAbi('eosio.token');
+    await api.getAbi('vex.token');
     return await api.transact({
         actions: [
-            api.with('eosio.token').as('bob').transfer('bob', 'alice', '0.0001 SYS', 'transactWithShorthandApiJson')
+            api.with('vex.token').as('bob').transfer('bob', 'alice', '0.0001 SYS', 'transactWithShorthandApiJson')
         ]
     }, {
         blocksBehind: 3,
@@ -131,9 +131,9 @@ const transactWithShorthandApiJson = async () => {
 };
 
 const transactWithShorthandTxJson = async () => {
-    await api.getAbi('eosio.token');
+    await api.getAbi('vex.token');
     const tx = api.buildTransaction();
-    tx.with('eosio.token').as('bob').transfer('bob', 'alice', '0.0001 SYS', 'transactWithShorthandTxJson');
+    tx.with('vex.token').as('bob').transfer('bob', 'alice', '0.0001 SYS', 'transactWithShorthandTxJson');
     return await tx.send({
         blocksBehind: 3,
         expireSeconds: 30
@@ -186,7 +186,7 @@ const transactWithResourcePayer = async () => {
             max_memory_bytes: 0
         },
         actions: [{
-            account: 'eosio.token',
+            account: 'vex.token',
             name: 'transfer',
             authorization: [{
                 actor: 'bob',
@@ -230,7 +230,7 @@ const readOnlyQuery = async () => {
 const readOnlyFailureTrace = async () => {
     return await api.transact({
         actions: [{
-            account: 'eosio',
+            account: 'vexcore',
             name: 'setpriv',
             authorization: [{
                 actor: 'bob',
@@ -253,7 +253,7 @@ const broadcastResult = async (signaturesAndPackedTransaction) => await api.push
 
 const transactShouldFail = async () => await api.transact({
     actions: [{
-        account: 'eosio.token',
+        account: 'vex.token',
         name: 'transfer',
         authorization: [{
             actor: 'bob',

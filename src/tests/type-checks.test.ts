@@ -138,7 +138,7 @@ describe('Chain API Plugin Endpoints', () => {
     });
 
     it('validates return type of get_account', async () => {
-        const result: GetAccountResult = await rpc.get_account('eosio');
+        const result: GetAccountResult = await rpc.get_account('vexcore');
         const getAccountResult: any = {
             account_name: 'string',
             head_block_num: 'number',
@@ -233,7 +233,7 @@ describe('Chain API Plugin Endpoints', () => {
         const result: GetAccountsByAuthorizersResult = await rpc.get_accounts_by_authorizers([
             { actor: 'bob', permission: 'active' },
             { actor: 'cfhello', permission: 'active' }
-        ], ['EOS7bxrQUTbQ4mqcoefhWPz1aFieN4fA9RQAiozRz7FrUChHZ7Rb8', 'EOS6nVrBASwwviMy3CntKsb1cD5Ai2gRZnyrxJDqypL3JLL7KCKrK']);
+        ], ['VEX7bxrQUTbQ4mqcoefhWPz1aFieN4fA9RQAiozRz7FrUChHZ7Rb8', 'VEX6nVrBASwwviMy3CntKsb1cD5Ai2gRZnyrxJDqypL3JLL7KCKrK']);
         const getAccountsByAuthorizersResult: any = {
             accounts: {
                 account_name: 'string',
@@ -519,16 +519,16 @@ describe('Chain API Plugin Endpoints', () => {
     });
 
     it('validates return type of get_currency_balance', async () => {
-        const result: string[] = await rpc.get_currency_balance('eosio.token', 'bob', 'SYS');
+        const result: string[] = await rpc.get_currency_balance('vex.token', 'bob', 'VEX');
         result.forEach((element: any) => {
             expect(typeof element).toEqual('string');
         });
     });
 
     it('validates return type of get_currency_stats', async () => {
-        const result: GetCurrencyStatsResult = await rpc.get_currency_stats('eosio.token', 'SYS');
+        const result: GetCurrencyStatsResult = await rpc.get_currency_stats('vex.token', 'VEX');
         const getCurrencyStatsResult: any = {
-            SYS: {
+            VEX: {
                 supply: 'string',
                 max_supply: 'string',
                 issuer: 'string',
@@ -635,7 +635,7 @@ describe('Chain API Plugin Endpoints', () => {
     });
 
     it('validates return type of get_raw_code_and_abi', async () => {
-        const result: GetRawCodeAndAbiResult = await rpc.get_raw_code_and_abi('eosio');
+        const result: GetRawCodeAndAbiResult = await rpc.get_raw_code_and_abi('vexcore');
         const getRawCodeAndAbiResult: any = {
             account_name: 'string',
             wasm: 'string',
@@ -645,7 +645,7 @@ describe('Chain API Plugin Endpoints', () => {
     });
 
     it('validates return type of get_raw_abi', async () => {
-        const result: GetRawAbiResult = await rpc.get_raw_abi('eosio');
+        const result: GetRawAbiResult = await rpc.get_raw_abi('vexcore');
         const getRawAbiResult: any = {
             account_name: 'string',
             code_hash: 'string',
@@ -710,8 +710,8 @@ describe('Chain API Plugin Endpoints', () => {
 
     it('validates return type of get_table_rows', async () => {
         const result: GetTableRowsResult = await rpc.get_table_rows({
-            code: 'eosio.token',
-            scope: 'eosio.token',
+            code: 'vex.token',
+            scope: 'vex.token',
             table: 'accounts',
         });
         const getTableRowsResult: any = {
@@ -741,7 +741,7 @@ describe('Chain API Plugin Endpoints', () => {
 
     it('validates return type of get_table_by_scope', async () => {
         const result: GetTableByScopeResult = await rpc.get_table_by_scope({
-            code: 'eosio.token',
+            code: 'vex.token',
             table: 'accounts',
         });
         const getTableByScopeResult: any = {
@@ -755,7 +755,7 @@ describe('Chain API Plugin Endpoints', () => {
         const info = await rpc.get_info();
         let transaction: Transaction = {
             actions: [{
-                account: 'eosio.token',
+                account: 'vex.token',
                 name: 'transfer',
                 authorization: [{
                     actor: 'bob',
@@ -764,7 +764,7 @@ describe('Chain API Plugin Endpoints', () => {
                 data: {
                     from: 'bob',
                     to: 'alice',
-                    quantity: '0.0001 SYS',
+                    quantity: '0.0001 VEX',
                     memo: '',
                 },
             }],
@@ -791,7 +791,7 @@ describe('Chain API Plugin Endpoints', () => {
     it('validates return type of push_transaction', async () => {
         const transaction: PushTransactionArgs = await api.transact({
             actions: [{
-                account: 'eosio.token',
+                account: 'vex.token',
                 name: 'transfer',
                 authorization: [{
                     actor: 'bob',
@@ -800,7 +800,7 @@ describe('Chain API Plugin Endpoints', () => {
                 data: {
                     from: 'bob',
                     to: 'alice',
-                    quantity: '0.0001 SYS',
+                    quantity: '0.0001 VEX',
                     memo: '',
                 },
             }],
@@ -983,7 +983,7 @@ describe('Chain API Plugin Endpoints', () => {
     it('validates return type of push_transactions', async () => {
         const transactionA: PushTransactionArgs = await api.transact({
             actions: [{
-                account: 'eosio.token',
+                account: 'vex.token',
                 name: 'transfer',
                 authorization: [{
                     actor: 'bob',
@@ -992,7 +992,7 @@ describe('Chain API Plugin Endpoints', () => {
                 data: {
                     from: 'bob',
                     to: 'alice',
-                    quantity: '0.0001 SYS',
+                    quantity: '0.0001 VEX',
                     memo: 'A',
                 },
             }],
@@ -1004,7 +1004,7 @@ describe('Chain API Plugin Endpoints', () => {
         }) as PushTransactionArgs;
         const transactionB: PushTransactionArgs = await api.transact({
             actions: [{
-                account: 'eosio.token',
+                account: 'vex.token',
                 name: 'transfer',
                 authorization: [{
                     actor: 'bob',
@@ -1013,7 +1013,7 @@ describe('Chain API Plugin Endpoints', () => {
                 data: {
                     from: 'bob',
                     to: 'alice',
-                    quantity: '0.0001 SYS',
+                    quantity: '0.0001 VEX',
                     memo: 'B',
                 },
             }],
@@ -1102,7 +1102,7 @@ describe('Chain API Plugin Endpoints', () => {
     it('validates return type of send_transaction', async () => {
         const transaction: PushTransactionArgs = await api.transact({
             actions: [{
-                account: 'eosio.token',
+                account: 'vex.token',
                 name: 'transfer',
                 authorization: [{
                     actor: 'alice',
@@ -1111,7 +1111,7 @@ describe('Chain API Plugin Endpoints', () => {
                 data: {
                     from: 'alice',
                     to: 'bob',
-                    quantity: '0.0001 SYS',
+                    quantity: '0.0001 VEX',
                     memo: '',
                 },
             }],
